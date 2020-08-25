@@ -1,4 +1,4 @@
-resource "aws_security_group" "app1_sg" {
+resource "aws_security_group" "sg" {
   name   = "${var.name}-sg"
   vpc_id = var.vpc_id
 
@@ -23,13 +23,13 @@ resource "aws_security_group" "app1_sg" {
   }
 }
 
-resource "aws_instance" "srv1" {
+resource "aws_instance" "instance" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_size
   key_name                    = aws_key_pair.key.key_name
   subnet_id                   = var.subnet_id
   associate_public_ip_address = false
-  security_groups             = [aws_security_group.app1_sg.id]
+  security_groups             = [aws_security_group.sg.id]
   lifecycle {
     ignore_changes = [security_groups]
   }
