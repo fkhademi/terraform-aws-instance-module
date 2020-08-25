@@ -1,7 +1,5 @@
-# terraform-aviatrix-linux-client
-Generic Terraform for deploying Linux client in various clouds
-
 ### Description
+Generic terraform for deploying Linux client in various clouds
 
 ### Usage Example
 ```
