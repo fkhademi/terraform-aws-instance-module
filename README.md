@@ -1,5 +1,5 @@
 ### Description
-Generic terraform for deploying Linux client in various clouds
+Generic terraform module for deploying Linux VM, ssh key and sec group in AWS
 
 ### Usage Example
 ```
