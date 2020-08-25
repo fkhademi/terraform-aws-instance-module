@@ -34,7 +34,7 @@ resource "aws_instance" "srv1" {
     ignore_changes = [security_groups]
   }
       tags = {
-    name = "${var.name}-srv"
+    Name = "${var.name}-srv"
   }
 }
 
