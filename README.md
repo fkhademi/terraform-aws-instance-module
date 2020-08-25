@@ -36,3 +36,6 @@ This module will return the following outputs:
 
 key | description
 :---|:---
+vm | The created VM as an object with all of it's attributes. This was created using the aws_instance resource.
+key | The created SSH Key as an object with all of it's attributes. This was created using the aws_key_pair resource.
+sg | The created Security Group as an object with all of it's attributes. This was created using the aws_security_group resource.
