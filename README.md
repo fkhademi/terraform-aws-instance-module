@@ -4,7 +4,7 @@ Generic terraform module for deploying Linux VM, ssh key and sec group in AWS
 ### Usage Example
 ```
 module "srv1" {
-  source        = "git::https://github.com/fkhademi/terraform-aviatrix-linux-client.git"
+  source        = "git::https://github.com/fkhademi/terraform-aws-instance-module.git"
 
   name		= "frey"
   region	= "eu-central-1"
