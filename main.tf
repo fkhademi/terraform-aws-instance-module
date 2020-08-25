@@ -24,7 +24,7 @@ resource "aws_security_group" "app1_sg" {
 }
 
 resource "aws_instance" "srv1" {
-  ami                         = data.aws_ami.region1_ubuntu.id
+  ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_size
   key_name                    = aws_key_pair.key.key_name
   subnet_id                   = var.subnet_id
