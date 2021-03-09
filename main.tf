@@ -28,7 +28,7 @@ resource "aws_instance" "instance" {
   instance_type               = var.instance_size
   key_name                    = aws_key_pair.key.key_name
   subnet_id                   = var.subnet_id
-  associate_public_ip_address = false
+  associate_public_ip_address = var.public_ip
   security_groups             = [aws_security_group.sg.id]
   lifecycle {
     ignore_changes = [security_groups]

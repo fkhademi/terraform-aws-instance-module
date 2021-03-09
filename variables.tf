@@ -18,6 +18,10 @@ variable "ssh_key" {
   type = string
 }
 
+variable "public_ip" {
+  default = false
+}
+
 variable "instance_size" {
   type    = string
   default = "t2.micro"
