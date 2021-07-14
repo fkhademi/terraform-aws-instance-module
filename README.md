@@ -30,6 +30,8 @@ The following variables are optional:
 key | default | value 
 :---|:---|:---
 instance_size | t2.micro | The size of the EC2 instance
+public_ip | false | Assign an EIP to the instance
+user_data | | Initiate user_data script on the instance
 
 ### Outputs
 This module will return the following outputs:
