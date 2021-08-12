@@ -15,6 +15,18 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "TCP"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 1
+    to_port     = 65000
+    protocol    = "TCP"
+    cidr_blocks = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+  }
+  ingress {
     from_port   = -1
     to_port     = -1
     protocol    = "ICMP"
