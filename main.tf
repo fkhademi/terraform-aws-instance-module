@@ -53,12 +53,10 @@ resource "aws_security_group" "sg" {
   }
 }
 
-resource "aws_network_interface" "egress" {
-  subnet_id   = var.subnet_id
-
-  tags = {
-    Name = "${var.name}-WAN-eni"
-  }
+resource "aws_ec2_tag" "eni" {
+  resource_id = aws_instance.instance.primary_network_interface_id
+  key         = "Name"       
+  value       = "WAN-eni"
 }
 
 resource "aws_instance" "instance" {
@@ -69,10 +67,6 @@ resource "aws_instance" "instance" {
   associate_public_ip_address = var.public_ip
   security_groups             = [aws_security_group.sg.id]
   user_data                   = var.user_data
-  network_interface {
-    network_interface_id = aws_network_interface.egress.id
-    device_index         = 0
-  }
   lifecycle {
     ignore_changes = [security_groups]
   }
