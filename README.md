@@ -30,6 +30,7 @@ The following variables are optional:
 key | default | value 
 :---|:---|:---
 instance_size | t2.micro | The size of the EC2 instance
+public_ip | false | Set to true to assign a public IP to the instance
 
 ### Outputs
 This module will return the following outputs:
