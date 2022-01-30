@@ -36,6 +36,7 @@ resource "aws_instance" "instance" {
   subnet_id                   = var.subnet_id
   associate_public_ip_address = var.public_ip
   security_groups             = [aws_security_group.sg.id]
+  user_data                   = var.user_data
   lifecycle {
     ignore_changes = [security_groups]
   }
