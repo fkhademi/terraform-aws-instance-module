@@ -12,3 +12,8 @@ output "sg" {
   description = "The created Security Group as an object with all of it's attributes. This was created using the aws_security_group resource."
   value       = aws_security_group.default
 }
+
+output "eip" {
+  description = "The created EIP as an object with all of it's attributes. This was created using the aws_eip resource."
+  value       = aws_eip.default
+}
