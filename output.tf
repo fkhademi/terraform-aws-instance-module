@@ -1,6 +1,6 @@
 output "vm" {
   description = "The created VM as an object with all of it's attributes. This was created using the aws_instance resource."
-  value       = aws_instance.instance
+  value       = aws_instance.default
 }
 
 output "key" {
@@ -10,5 +10,5 @@ output "key" {
 
 output "sg" {
   description = "The created Security Group as an object with all of it's attributes. This was created using the aws_security_group resource."
-  value       = aws_security_group.sg
+  value       = aws_security_group.default
 }

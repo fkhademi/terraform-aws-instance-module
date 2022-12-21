@@ -1,4 +1,4 @@
-resource "aws_security_group" "sg" {
+resource "aws_security_group" "default" {
   name   = "${var.name}-sg"
   vpc_id = var.vpc_id
 
@@ -11,6 +11,12 @@ resource "aws_security_group" "sg" {
   ingress {
     from_port   = 80
     to_port     = 80
+    protocol    = "TCP"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 443
+    to_port     = 443
     protocol    = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -35,18 +41,26 @@ resource "aws_security_group" "sg" {
   }
 }
 
-resource "aws_instance" "instance" {
-  ami                         = data.aws_ami.ubuntu.id
-  instance_type               = var.instance_size
-  key_name                    = aws_key_pair.key.key_name
-  subnet_id                   = var.subnet_id
-  associate_public_ip_address = var.public_ip
-  security_groups             = [aws_security_group.sg.id]
-  user_data                   = var.user_data
+resource "aws_eip" "default" {
+  vpc               = true
+  network_interface = aws_instance.default.primary_network_interface_id
+
+  tags = {
+    "Name" = "${var.name}-eip"
+  }
+}
+
+resource "aws_instance" "default" {
+  ami             = data.aws_ami.ubuntu.id
+  instance_type   = var.instance_size
+  key_name        = aws_key_pair.key.key_name
+  subnet_id       = var.subnet_id
+  security_groups = [aws_security_group.default.id]
+  user_data       = var.user_data
   lifecycle {
     ignore_changes = [security_groups]
   }
-      tags = {
+  tags = {
     Name = "${var.name}-srv"
   }
 }
