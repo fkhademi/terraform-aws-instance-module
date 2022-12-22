@@ -21,6 +21,12 @@ resource "aws_security_group" "default" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
+    from_port   = 3389
+    to_port     = 3389
+    protocol    = "TCP"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -54,7 +60,7 @@ resource "aws_eip" "default" {
 resource "aws_instance" "default" {
   ami             = data.aws_ami.ubuntu.id
   instance_type   = var.instance_size
-  key_name        = aws_key_pair.key.key_name
+  key_name        = aws_key_pair.default.key_name
   subnet_id       = var.subnet_id
   security_groups = [aws_security_group.default.id]
   user_data       = var.user_data
@@ -66,7 +72,7 @@ resource "aws_instance" "default" {
   }
 }
 
-resource "aws_key_pair" "key" {
+resource "aws_key_pair" "default" {
   key_name   = "${var.name}-key"
   public_key = var.ssh_key
 }

@@ -5,7 +5,7 @@ output "vm" {
 
 output "key" {
   description = "The created SSH Key as an object with all of it's attributes. This was created using the aws_key_pair resource."
-  value       = aws_key_pair.key
+  value       = aws_key_pair.default
 }
 
 output "sg" {

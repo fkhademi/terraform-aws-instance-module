@@ -30,3 +30,8 @@ variable "instance_size" {
 variable "user_data" {
   default = ""
 }
+
+variable "ubuntu_version" {
+  description = "Ubuntu version to deploy.  Use 18, 20 or 22"
+  default     = "20"  
+}
