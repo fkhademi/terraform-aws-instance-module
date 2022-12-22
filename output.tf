@@ -14,6 +14,7 @@ output "sg" {
 }
 
 output "eip" {
+  count       = var.public_ip ? 1 : 0
   description = "The created EIP as an object with all of it's attributes. This was created using the aws_eip resource."
   value       = aws_eip.default
 }
