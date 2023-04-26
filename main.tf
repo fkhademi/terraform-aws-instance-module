@@ -68,10 +68,11 @@ resource "aws_eip" "default" {
 }
 
 resource "aws_instance" "default" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_size
-  key_name      = aws_key_pair.default.key_name
-  user_data     = var.user_data
+  ami               = data.aws_ami.ubuntu.id
+  instance_type     = var.instance_size
+  key_name          = aws_key_pair.default.key_name
+  user_data         = var.user_data
+  source_dest_check = false
 
   network_interface {
     network_interface_id = aws_network_interface.wan.id
