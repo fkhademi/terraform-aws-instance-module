@@ -8,7 +8,17 @@ resource "aws_security_group" "wan" {
     content {
       from_port   = ingress.value
       to_port     = ingress.value
-      protocol    = "-1"
+      protocol    = "TCP"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+
+  dynamic "ingress" {
+    for_each = var.ingress_ports
+    content {
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "UDP"
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
@@ -62,13 +72,16 @@ resource "aws_instance" "default" {
   instance_type = var.instance_size
   key_name      = aws_key_pair.default.key_name
   user_data     = var.user_data
-  # network_interface {
-  #   network_interface_id = aws_network_interface.wan.id
-  # }
 
-  # network_interface {
-  #   network_interface_id = aws_network_interface.lan.id
-  # }
+  network_interface {
+    network_interface_id = aws_network_interface.wan.id
+    device_index         = 0
+  }
+
+  network_interface {
+    network_interface_id = aws_network_interface.lan.id
+    device_index         = 1
+  }
   #subnet_id       = var.subnet_id
   #security_groups = [aws_security_group.wan.id]
   #lifecycle {
@@ -88,18 +101,18 @@ resource "aws_network_interface" "wan" {
   subnet_id       = var.wan_subnet_id
   security_groups = [aws_security_group.wan.id]
 
-  attachment {
-    instance     = aws_instance.default.id
-    device_index = 0
-  }
+  # attachment {
+  #   instance     = aws_instance.default.id
+  #   device_index = 0
+  # }
 }
 
 resource "aws_network_interface" "lan" {
   subnet_id       = var.lan_subnet_id
   security_groups = [aws_security_group.lan.id]
 
-  attachment {
-    instance     = aws_instance.default.id
-    device_index = 1
-  }
+  # attachment {
+  #   instance     = aws_instance.default.id
+  #   device_index = 1
+  # }
 }
