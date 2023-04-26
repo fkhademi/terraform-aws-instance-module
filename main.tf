@@ -4,8 +4,8 @@ resource "aws_security_group" "wan" {
 
   dynamic "ingress" {
     #iterator    = port
+    for_each = var.ingress_ports
     content {
-      for_each    = var.ingress_ports
       from_port   = ingress.value
       to_port     = ingress.value
       protocol    = "-1"
