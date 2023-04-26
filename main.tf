@@ -3,10 +3,10 @@ resource "aws_security_group" "wan" {
   vpc_id = var.vpc_id
 
   dynamic "ingress" {
-    iterator    = port
+    #iterator    = port
     for_each    = var.ingress_ports
-    from_port   = port.value
-    to_port     = port.value
+    from_port   = ingress.value
+    to_port     = ingress.value
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
