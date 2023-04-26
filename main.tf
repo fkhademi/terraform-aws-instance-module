@@ -60,13 +60,13 @@ resource "aws_instance" "default" {
   instance_type = var.instance_size
   key_name      = aws_key_pair.default.key_name
   user_data     = var.user_data
-  network_interface {
-    network_interface_id = aws_network_interface.wan.id
-  }
+  # network_interface {
+  #   network_interface_id = aws_network_interface.wan.id
+  # }
 
-  network_interface {
-    network_interface_id = aws_network_interface.lan.id
-  }
+  # network_interface {
+  #   network_interface_id = aws_network_interface.lan.id
+  # }
   #subnet_id       = var.subnet_id
   #security_groups = [aws_security_group.wan.id]
   #lifecycle {
