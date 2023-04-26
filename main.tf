@@ -68,11 +68,10 @@ resource "aws_eip" "default" {
 }
 
 resource "aws_instance" "default" {
-  ami               = data.aws_ami.ubuntu.id
-  instance_type     = var.instance_size
-  key_name          = aws_key_pair.default.key_name
-  user_data         = var.user_data
-  source_dest_check = false
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.instance_size
+  key_name      = aws_key_pair.default.key_name
+  user_data     = var.user_data
 
   network_interface {
     network_interface_id = aws_network_interface.wan.id
@@ -99,9 +98,9 @@ resource "aws_key_pair" "default" {
 }
 
 resource "aws_network_interface" "wan" {
-  subnet_id       = var.wan_subnet_id
-  security_groups = [aws_security_group.wan.id]
-
+  subnet_id         = var.wan_subnet_id
+  security_groups   = [aws_security_group.wan.id]
+  source_dest_check = false
   # attachment {
   #   instance     = aws_instance.default.id
   #   device_index = 0
@@ -109,9 +108,9 @@ resource "aws_network_interface" "wan" {
 }
 
 resource "aws_network_interface" "lan" {
-  subnet_id       = var.lan_subnet_id
-  security_groups = [aws_security_group.lan.id]
-
+  subnet_id         = var.lan_subnet_id
+  security_groups   = [aws_security_group.lan.id]
+  source_dest_check = false
   # attachment {
   #   instance     = aws_instance.default.id
   #   device_index = 1
