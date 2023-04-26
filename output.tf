@@ -8,9 +8,14 @@ output "key" {
   value       = aws_key_pair.default
 }
 
-output "sg" {
-  description = "The created Security Group as an object with all of it's attributes. This was created using the aws_security_group resource."
-  value       = aws_security_group.default
+output "lan_nic" {
+  description = "The LAN Network Interface resource."
+  value       = aws_network_interface.lan
+}
+
+output "wan_nic" {
+  description = "The WAN Network Interface resource."
+  value       = aws_network_interface.wan
 }
 
 output "eip" {
