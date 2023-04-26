@@ -10,7 +10,11 @@ variable "vpc_id" {
   type = string
 }
 
-variable "subnet_id" {
+variable "wan_subnet_id" {
+  type = string
+}
+
+variable "lan_subnet_id" {
   type = string
 }
 
