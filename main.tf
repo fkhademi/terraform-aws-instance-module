@@ -49,7 +49,6 @@ resource "aws_security_group" "default" {
 
 resource "aws_eip" "default" {
   count             = var.public_ip ? 1 : 0
-  vpc               = true
   network_interface = aws_instance.default.primary_network_interface_id
 
   tags = {
