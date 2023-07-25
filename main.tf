@@ -49,7 +49,7 @@ resource "aws_eip" "default" {
 resource "aws_eip_association" "default" {
   count         = var.public_ip ? 1 : 0
   instance_id   = aws_instance.default.id
-  allocation_id = aws_eip.default.id
+  allocation_id = aws_eip.default[0].id
 }
 
 resource "aws_instance" "default" {
