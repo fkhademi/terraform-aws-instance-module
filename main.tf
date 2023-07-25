@@ -38,12 +38,18 @@ resource "aws_security_group" "default" {
 }
 
 resource "aws_eip" "default" {
-  count             = var.public_ip ? 1 : 0
-  network_interface = aws_instance.default.primary_network_interface_id
+  count = var.public_ip ? 1 : 0
+  #network_interface = aws_instance.default.primary_network_interface_id
 
   tags = {
     "Name" = "${var.name}-eip"
   }
+}
+
+resource "aws_eip_association" "default" {
+  count         = var.public_ip ? 1 : 0
+  instance_id   = aws_instance.default.id
+  allocation_id = aws_eip.default.id
 }
 
 resource "aws_instance" "default" {
